@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Virus_Stats" load_steps=2 format=3 uid="uid://bn5y58o2kgtaq"]
+
+[ext_resource type="Script" uid="uid://cqxdnbyd5ml1m" path="res://Scripts/resource scripts/Virus_Stats.gd" id="1_4cccx"]
+
+[resource]
+script = ExtResource("1_4cccx")
+name = "Fire"
+health = 1.0
+speed = 125.0
+damage = 1.0
+metadata/_custom_type_script = "uid://cqxdnbyd5ml1m"
