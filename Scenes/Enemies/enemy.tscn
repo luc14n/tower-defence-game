@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://u1d2le8te1px"]
+
+[ext_resource type="Script" uid="uid://diqebx22ow2dk" path="res://Scripts/Enemies/enem_virus.gd" id="1_613su"]
+[ext_resource type="Texture2D" uid="uid://dn83h5dwijtue" path="res://Assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile296.png" id="2_jcvw6"]
+[ext_resource type="Resource" uid="uid://bn5y58o2kgtaq" path="res://Resources/Fire.tres" id="2_x1rqp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x1rqp"]
+radius = 24.0
+height = 64.0
+
+[node name="Enemy" type="PathFollow2D"]
+loop = false
+script = ExtResource("1_613su")
+virus_stats = ExtResource("2_x1rqp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jcvw6")
+
+[node name="Enemyarea" type="Area2D" parent="." groups=["Enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemyarea"]
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_x1rqp")
+
+[connection signal="body_entered" from="Enemyarea" to="." method="_on_enemyarea_body_entered"]

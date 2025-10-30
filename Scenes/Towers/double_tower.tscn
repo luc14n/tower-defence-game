@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://h3gy6igsgysx"]
+
+[ext_resource type="Script" uid="uid://cnv1mqk1kbx88" path="res://Scripts/Tanks/double_tower.gd" id="1_v1wsr"]
+[ext_resource type="PackedScene" uid="uid://bljbnxiypcyjb" path="res://Scenes/Towers/Projectiles/double_proj.tscn" id="2_cors7"]
+[ext_resource type="Texture2D" uid="uid://drd5kdjm8vqrq" path="res://Assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile250.png" id="2_v1wsr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igmnh"]
+size = Vector2(55, 42)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l6m71"]
+radius = 245.58908
+
+[node name="Double Tower" type="StaticBody2D"]
+script = ExtResource("1_v1wsr")
+projectile = ExtResource("2_cors7")
+fire_rate = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5707964
+texture = ExtResource("2_v1wsr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_igmnh")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(30, 0)
+
+[node name="EnemDetectection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemDetectection"]
+shape = SubResource("CircleShape2D_l6m71")
+
+[connection signal="area_entered" from="EnemDetectection" to="." method="_on_enem_detectection_area_entered"]
+[connection signal="area_exited" from="EnemDetectection" to="." method="_on_enem_detectection_area_exited"]

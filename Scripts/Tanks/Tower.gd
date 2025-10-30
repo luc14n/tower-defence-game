@@ -1,15 +1,14 @@
 extends StaticBody2D
+class_name Tower
 
+@export var projectile: PackedScene
 @export var fire_rate:= 1.0
 @export var bullet_damage := 1.0
 
-@onready var projectile = preload("uid://dnv8q0jdyqo07")
 @onready var muzzle: Marker2D = $Muzzle
-
 
 var enemies_seen := []
 var time_since_last_shot := 0.0
-
 
 func _physics_process(delta: float) -> void:
 	time_since_last_shot += delta
@@ -22,17 +21,16 @@ func _physics_process(delta: float) -> void:
 
 func shoot(tar):
 	var bullet = projectile.instantiate()
+	bullet.set_target(tar)
 	bullet.global_position = muzzle.global_position
 	bullet.look_at(tar.global_position)
 	bullet.damage = bullet_damage
 	get_tree().current_scene.add_child(bullet)
-	bullet.set_target(tar)
 
+func _on_enem_detectection_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Enemy"):
+		enemies_seen.append(area)
 
-func _on_enem_detectection_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Enemy"):
-		enemies_seen.append(body)
-		
-func _on_enem_detectection_body_exited(body: Node2D) -> void:
-	if body.is_in_group("Enemy"):
-		enemies_seen.erase(body)
+func _on_enem_detectection_area_exited(area: Area2D) -> void:
+	if area.is_in_group("Enemy"):
+		enemies_seen.erase(area)

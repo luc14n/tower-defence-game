@@ -15,6 +15,22 @@ run/main_scene="uid://cw6gt4rqpfwnq"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[global_group]
+
+Proj=""
+Towers=""
+
+[input]
+
+"Left click"={
+"deadzone": 0.2,
+"events": []
+}
+"Right click"={
+"deadzone": 0.2,
+"events": []
+}
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

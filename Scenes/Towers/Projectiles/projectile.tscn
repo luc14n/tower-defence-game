@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnv8q0jdyqo07"]
+
+[ext_resource type="Script" uid="uid://b3iee6sj0pveh" path="res://Scripts/Tanks/projectile.gd" id="1_aihi3"]
+[ext_resource type="Texture2D" uid="uid://ddq7sylngbwra" path="res://Assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile251.png" id="2_c3q3r"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yr2qt"]
+height = 38.0
+
+[node name="Projectile" type="CharacterBody2D" groups=["Proj"]]
+script = ExtResource("1_aihi3")
+speed = 500.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Proj"]]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_yr2qt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5707964
+texture = ExtResource("2_c3q3r")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
