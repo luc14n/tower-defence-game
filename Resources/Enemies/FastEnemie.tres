@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Virus_Stats" load_steps=2 format=3 uid="uid://bu7wag7qlj1wr"]
+
+[ext_resource type="Script" uid="uid://cqxdnbyd5ml1m" path="res://Scripts/Resources/Virus_Stats.gd" id="1_i4jpi"]
+
+[resource]
+script = ExtResource("1_i4jpi")
+name = "Fast"
+max_health = 1.0
+speed = 50.0
+damage = 1.0
+Worth = 2
+metadata/_custom_type_script = "uid://cqxdnbyd5ml1m"

@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqmoc0kavr2g6"]
+
+[ext_resource type="Script" uid="uid://dmdqyphadnhrn" path="res://Scripts/Panels/Norm_Tower_panel_node.gd" id="1_qh1e0"]
+[ext_resource type="Script" uid="uid://cn2dffbl3qbcy" path="res://Scripts/Panels/Norm_Tower_panel.gd" id="2_rvtia"]
+[ext_resource type="PackedScene" uid="uid://deug8vwqga8to" path="res://Scenes/Towers/Proj Tower.tscn" id="3_wg6l1"]
+[ext_resource type="Texture2D" uid="uid://4do0srw1c8g1" path="res://Assets/Drawn Assets/Basic Tower.png" id="4_qh1e0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k8sf0"]
+bg_color = Color(0.12349, 0.14921987, 0.15272081, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.2509804, 0.2, 0.3254902, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Norm_Tower" type="Control" node_paths=PackedStringArray("Pannel")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
+script = ExtResource("1_qh1e0")
+Pannel = NodePath("Norm_tank_panel")
+
+[node name="Norm_tank_panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_k8sf0")
+script = ExtResource("2_rvtia")
+display_tower = ExtResource("3_wg6l1")
+worth = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="Norm_tank_panel"]
+position = Vector2(32.000004, 24.000002)
+rotation = 1.5707964
+scale = Vector2(2.0020657, 1.999565)
+texture = ExtResource("4_qh1e0")
+
+[node name="Cost" type="Label" parent="."]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 40.0
+offset_right = 72.0
+offset_bottom = 63.0
+text = "9999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="gui_input" from="Norm_tank_panel" to="Norm_tank_panel" method="_on_gui_input"]

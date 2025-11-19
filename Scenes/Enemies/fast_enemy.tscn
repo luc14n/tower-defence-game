@@ -1,0 +1,111 @@
+[gd_scene load_steps=13 format=3 uid="uid://b0vfaogxkbx0n"]
+
+[ext_resource type="Script" uid="uid://dheyu55eenc07" path="res://Scripts/Enemies/fast_enemy.gd" id="1_2nc62"]
+[ext_resource type="Resource" uid="uid://bu7wag7qlj1wr" path="res://Resources/Enemies/FastEnemie.tres" id="2_sv1xs"]
+[ext_resource type="Texture2D" uid="uid://d21vjp1o8gcgw" path="res://Assets/Drawn Assets/Tower Defence TileSet.png" id="3_sv1xs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwcqu"]
+atlas = ExtResource("3_sv1xs")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqk40"]
+atlas = ExtResource("3_sv1xs")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7uiqv"]
+atlas = ExtResource("3_sv1xs")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2nc62"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwcqu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqk40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7uiqv")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v6lyt"]
+radius = 8.0
+height = 16.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wx66h"]
+bg_color = Color(0.65, 0.3683333, 0, 1)
+
+[sub_resource type="Animation" id="Animation_f8mow"]
+resource_name = "Idle"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.73333335, 1.4333333, 2.2333333, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.5707963267948966, 0.0, -1.5707963267948966, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_hnht5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vd4f0"]
+_data = {
+&"Idle": SubResource("Animation_f8mow"),
+&"RESET": SubResource("Animation_hnht5")
+}
+
+[node name="Fast Enemy" type="PathFollow2D" node_paths=PackedStringArray("health_bar")]
+script = ExtResource("1_2nc62")
+virus_stats = ExtResource("2_sv1xs")
+health_bar = NodePath("ProgressBar")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2nc62")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.98714864
+
+[node name="Enemyarea" type="Area2D" parent="." groups=["Enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemyarea"]
+shape = SubResource("CapsuleShape2D_v6lyt")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = -8.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_wx66h")
+show_percentage = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vd4f0")
+}
+autoplay = "Idle"
+
+[connection signal="body_entered" from="Enemyarea" to="." method="_on_enemyarea_body_entered"]

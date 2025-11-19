@@ -1,22 +1,23 @@
 [gd_scene load_steps=4 format=3 uid="uid://dnv8q0jdyqo07"]
 
 [ext_resource type="Script" uid="uid://b3iee6sj0pveh" path="res://Scripts/Tanks/projectile.gd" id="1_aihi3"]
-[ext_resource type="Texture2D" uid="uid://ddq7sylngbwra" path="res://Assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile251.png" id="2_c3q3r"]
+[ext_resource type="Texture2D" uid="uid://8tl41v6brtqg" path="res://Assets/Drawn Assets/Projectile.png" id="2_6qccj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yr2qt"]
-height = 38.0
+radius = 2.1855694e-08
+height = 4.371139e-08
 
 [node name="Projectile" type="CharacterBody2D" groups=["Proj"]]
 script = ExtResource("1_aihi3")
-speed = 500.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Proj"]]
-rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_yr2qt")
+speed = 1000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_6qccj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Proj"]]
+position = Vector2(0, -0.5)
 rotation = 1.5707964
-texture = ExtResource("2_c3q3r")
+shape = SubResource("CapsuleShape2D_yr2qt")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0

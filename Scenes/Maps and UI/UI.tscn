@@ -1,25 +1,51 @@
 [gd_scene load_steps=3 format=3 uid="uid://bylox8p5bdg1v"]
 
-[ext_resource type="PackedScene" uid="uid://cqmoc0kavr2g6" path="res://Scenes/Panels/norm_tank_panel.tscn" id="1_vg8ev"]
-[ext_resource type="PackedScene" uid="uid://bg2vevy3diekj" path="res://Scenes/Panels/double_tower_panel.tscn" id="2_db56t"]
+[ext_resource type="Script" uid="uid://oo804fs4kngo" path="res://Scripts/Levels-UI/ui.gd" id="1_ksqms"]
+[ext_resource type="PackedScene" uid="uid://cqmoc0kavr2g6" path="res://Scenes/Panels/Norm_Tower.tscn" id="1_vg8ev"]
 
-[node name="UI" type="CanvasLayer"]
+[node name="UI" type="CanvasLayer" groups=["UI"]]
+layer = -1
+script = ExtResource("1_ksqms")
 
 [node name="Panel" type="Panel" parent="."]
-offset_right = 1152.0
-offset_bottom = 128.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -64.0
+offset_right = 320.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="FlowContainer" type="FlowContainer" parent="Panel"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 16.0
-offset_right = 1144.0
-offset_bottom = 112.0
-theme_override_constants/h_separation = 7
-theme_override_constants/v_separation = 5
+offset_right = 640.0
+offset_bottom = 64.0
 
 [node name="Norm_tank_panel" parent="Panel/FlowContainer" instance=ExtResource("1_vg8ev")]
 layout_mode = 2
 
-[node name="Double_Tower_Panel" parent="Panel/FlowContainer" instance=ExtResource("2_db56t")]
-layout_mode = 2
+[node name="Score" type="Label" parent="."]
+offset_top = 192.0
+offset_right = 124.0
+offset_bottom = 206.0
+theme_override_font_sizes/font_size = 10
+text = "Score: 6767676767676767"
+
+[node name="money" type="Label" parent="."]
+offset_top = 208.0
+offset_right = 67.0
+offset_bottom = 222.0
+theme_override_font_sizes/font_size = 10
+text = "Mons: 999999"
+vertical_alignment = 2
+
+[node name="wave_count" type="Label" parent="."]
+offset_top = 223.0
+offset_right = 104.0
+offset_bottom = 237.0
+theme_override_font_sizes/font_size = 10
+text = "Wave Count: 999999"
+vertical_alignment = 2

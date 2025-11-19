@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://bg2vevy3diekj"]
+
+[ext_resource type="Script" uid="uid://bjfa66a3icts0" path="res://Scripts/Levels-UI/double_tower_panel_node.gd" id="1_kv740"]
+[ext_resource type="Script" uid="uid://cn2dffbl3qbcy" path="res://Scripts/Panels/Norm_Tower_panel.gd" id="2_lgkbv"]
+[ext_resource type="PackedScene" uid="uid://h3gy6igsgysx" path="res://Scenes/Towers/Zap Tower.tscn" id="3_hfhd4"]
+[ext_resource type="Texture2D" uid="uid://cc3pdd4urjtnr" path="res://Assets/kenney_tower-defense-top-down/PNG/Retina/towerDefense_tile250.png" id="4_uyb1r"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ukjyt"]
+bg_color = Color(0.48, 0.0816, 0.0816, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.9565396, 0.34451413, 0.31226367, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="FastTower" type="Control" node_paths=PackedStringArray("Pannel")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_kv740")
+Pannel = NodePath("Double_Tower_Panel")
+
+[node name="Double_Tower_Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ukjyt")
+script = ExtResource("2_lgkbv")
+display_tower = ExtResource("3_hfhd4")
+worth = 10
+metadata/_custom_type_script = "uid://cn2dffbl3qbcy"
+
+[node name="Sprite2D" type="Sprite2D" parent="Double_Tower_Panel"]
+position = Vector2(32, 24)
+scale = Vector2(0.28124997, 0.28125)
+texture = ExtResource("4_uyb1r")
+
+[node name="Cost" type="Label" parent="."]
+layout_mode = 0
+offset_left = -8.0
+offset_top = 40.0
+offset_right = 72.0
+offset_bottom = 63.0
+text = "9999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="gui_input" from="Double_Tower_Panel" to="Double_Tower_Panel" method="_on_gui_input"]

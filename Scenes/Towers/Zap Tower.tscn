@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://h3gy6igsgysx"]
+
+[ext_resource type="Script" uid="uid://cnv1mqk1kbx88" path="res://Scripts/Tanks/FastTower.gd" id="1_jsqar"]
+[ext_resource type="PackedScene" uid="uid://bljbnxiypcyjb" path="res://Scenes/Towers/Projectiles/double_proj.tscn" id="2_5jm0j"]
+[ext_resource type="Texture2D" uid="uid://drd5kdjm8vqrq" path="res://Assets/kenney_tower-defense-top-down/PNG/Default size/towerDefense_tile250.png" id="3_pfiko"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cors7"]
+bg_color = Color(1.2468618, 1.2468618, 1.2468618, 0.26666668)
+corner_radius_top_left = 450
+corner_radius_top_right = 450
+corner_radius_bottom_right = 450
+corner_radius_bottom_left = 450
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igmnh"]
+size = Vector2(55, 42)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l6m71"]
+radius = 176.0
+
+[sub_resource type="Curve" id="Curve_cors7"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.4967742, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="Zap Tower" type="Area2D" node_paths=PackedStringArray("particles", "vision_area") groups=["Towers"]]
+script = ExtResource("1_jsqar")
+projectile = ExtResource("2_5jm0j")
+particles = NodePath("CPUParticles2D")
+vision_area = NodePath("Area")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5707964
+texture = ExtResource("3_pfiko")
+
+[node name="Area" type="Panel" parent="."]
+offset_left = -176.0
+offset_top = -176.0
+offset_right = 176.0
+offset_bottom = 176.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_cors7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_igmnh")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(30, 0)
+
+[node name="EnemDetectection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemDetectection"]
+shape = SubResource("CircleShape2D_l6m71")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+scale_amount_min = 5.0
+scale_amount_max = 15.0
+scale_amount_curve = SubResource("Curve_cors7")
+color = Color(0.6862745, 0.22352941, 0.1764706, 1)
+
+[connection signal="area_entered" from="EnemDetectection" to="." method="_on_enem_detectection_area_entered"]
+[connection signal="area_exited" from="EnemDetectection" to="." method="_on_enem_detectection_area_exited"]

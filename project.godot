@@ -15,10 +15,21 @@ run/main_scene="uid://cw6gt4rqpfwnq"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://Scripts/Managers/Game_Manager.gd"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=320
+window/stretch/mode="canvas_items"
+
 [global_group]
 
 Proj=""
 Towers=""
+TileMap=""
 
 [input]
 

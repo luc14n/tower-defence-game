@@ -1,11 +1,13 @@
 [gd_resource type="Resource" script_class="Virus_Stats" load_steps=2 format=3 uid="uid://bn5y58o2kgtaq"]
 
-[ext_resource type="Script" uid="uid://cqxdnbyd5ml1m" path="res://Scripts/resource scripts/Virus_Stats.gd" id="1_4cccx"]
+[ext_resource type="Script" uid="uid://cqxdnbyd5ml1m" path="res://Scripts/Resources/Virus_Stats.gd" id="1_ahstl"]
 
 [resource]
-script = ExtResource("1_4cccx")
+script = ExtResource("1_ahstl")
 name = "Fire"
-max_health = 5.0
-speed = 125.0
+max_health = 2.0
+speed = 30.0
 damage = 1.0
+Worth = 1
+Score = 10
 metadata/_custom_type_script = "uid://cqxdnbyd5ml1m"
