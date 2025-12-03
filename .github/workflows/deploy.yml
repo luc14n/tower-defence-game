@@ -25,9 +25,9 @@ jobs:
       # Build the Docker image
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/C4Claymore224/${{ github.repository }}:latest -f Dockerfile.app .
+          docker build -t ghcr.io/C4Claymore224/tower-defence-game:latest -f Dockerfile.app .
 
       # Push the Docker image to GHCR
       - name: Push Docker image
         run: |
-          docker push ghcr.io/C4Claymore224/${{ github.repository }}:latest
+          docker push ghcr.io/C4Claymore224/tower-defence-game:latest
