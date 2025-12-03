@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context:
+      dockerfile: Dockerfile.app
+    ports:
+      - "8000:8000"
+    volumes:
+      - COSC450DB:/usr/src/app/database # Mount volume for SQLite database
+
+volumes:
+  COSC450DB: # Define named volume for persistent storage

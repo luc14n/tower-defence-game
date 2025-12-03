@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Web Defense Warriors</title>
+    <style>
+        body {
+            font-family: "Trebuchet MS", Helvetica, sans-serif; 
+            background-color: #383762;
+            text-align: center;
+        }
+        iframe { 
+            width: 100%;
+            height: 100%;
+            border: 2px solid #000;
+        }
+        h1 {
+            font-family: Copperplate, Papyrus, fantasy;
+            font-size: 5vw;
+            color: #000;
+        }
+        h2 {
+            font-family: Copperplate, Papyrus, fantasy;
+            font-size: 2vw;
+            color: #000;
+        }
+        p1 {
+            font-family: Copperplate, Papyrus, fantasy;
+            font-size: 1.5vw;
+            color: #000; 
+        }
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            width: 60%;
+            background-color: #fff;
+            box-shadow: 0 0 10vw rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1vw solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <div style="position: relative;">
+        <img src = "https://raw.githubusercontent.com/C4Claymore224/Tower-Defence-Game/main/Assets/Drawn%20Assets/Basic%20Tower-export.png" alt = "Basic_Tower" 
+            style="width:12.5%;height:auto;position: absolute; top: -2vh; left: 5vw;">
+        <img src = "https://raw.githubusercontent.com/C4Claymore224/Tower-Defence-Game/main/Assets/Drawn%20Assets/Bug-export.png" alt = "Bug" 
+            style="width:15%;height:auto;position: absolute; top: -10vh; right: 3vw;">
+    </div>
+    <h1>
+        Web Defense Warriors
+    </h1>
+    <p1>
+        Try and place in the top 10!
+    </p1>
+    <iframe src="game/index.html"></iframe>
+
+    <h2>🏆 Top Ten Scoreboard</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1</td><td>Alice</td><td>980</td></tr>
+            <tr><td>2</td><td>Bob</td><td>920</td></tr>
+            <tr><td>3</td><td>Charlie</td><td>890</td></tr>
+            <tr><td>4</td><td>Diana</td><td>870</td></tr>
+            <tr><td>5</td><td>Edward</td><td>850</td></tr>
+            <tr><td>6</td><td>Fiona</td><td>830</td></tr>
+            <tr><td>7</td><td>George</td><td>810</td></tr>
+            <tr><td>8</td><td>Hannah</td><td>790</td></tr>
+            <tr><td>9</td><td>Ian</td><td>770</td></tr>
+            <tr><td>10</td><td>Jane</td><td>750</td></tr>
+        </tbody>
+    </table>
+
+    <h2>Towers and Enemies</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><img src = "https://raw.githubusercontent.com/C4Claymore224/Tower-Defence-Game/main/Assets/Drawn%20Assets/Basic%20Tower-export.png" alt = "Basic_Tower"
+                style="width:20%;height:auto"></td><td>Firewall</td><td>Summons a wall of flames to scorch any bad programs</td></tr>
+            <tr><td><img src = "https://raw.githubusercontent.com/C4Claymore224/Tower-Defence-Game/main/Assets/Drawn%20Assets/Zap%20Tower-export.png" alt = "Zap_Tower"
+                style="width:20%;height:auto"></td><td>Electric Tower</td><td>Tower with small range and a faster fire rate to zap enemies away</td></tr>
+            <tr><td>3</td><td>Tower 3</td><td>Does another thing</td></tr>
+            <tr><td>4</td><td>Tower 4</td><td>Does something else</td></tr>
+            <tr><td><img src = "https://raw.githubusercontent.com/C4Claymore224/Tower-Defence-Game/main/Assets/Drawn%20Assets/CPU.png" alt = "CPU"
+                style="width:20%;height=auto"></td><td>Main Computer</td><td>Is your main base. Don't let it get too infected or your computer will die</td></tr>
+            <tr><td><img src = "https://raw.githubusercontent.com/C4Claymore224/Tower-Defence-Game/main/Assets/Drawn%20Assets/Bug-export.png" alt = "Bug"
+                style="width:20%;height:auto"></td><td>Bug</td><td>A simple bug. Easy to squash on its own, but don't let them group up</td></tr>
+            <tr><td><img src = "https://raw.githubusercontent.com/C4Claymore224/Tower-Defence-Game/main/Assets/Drawn%20Assets/Virus-export.png" alt = "Virus"
+                style="width:20%;height:auto"></td><td>Virus</td><td>Has more health does more damage</td></tr>
+            <tr><td><img src = "https://raw.githubusercontent.com/C4Claymore224/Tower-Defence-Game/main/Assets/Drawn%20Assets/Trojin-export.png" alt = "Trojan"
+                style="width:20%;height:auto"></td><td>Trojan Horse</td><td>Carries other viruses inside and releases them upon death</td></tr>
+            <tr><td>9</td><td>Another Enemy</td><td>Does a bad thing</td></tr>
+        </tbody>
+    </table>
+</body>
+</html>
