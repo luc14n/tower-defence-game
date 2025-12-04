@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Web Defense Warriors - A Tower Defense Game">
     <title>Web Defense Warriors</title>
     <style>
         body {
-            font-family: "Trebuchet MS", Helvetica, sans-serif; 
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
             background-color: #383762;
             text-align: center;
         }
-        iframe { 
+        iframe {
             width: 100%;
             height: 100%;
             border: 2px solid #000;
@@ -25,10 +26,10 @@
             font-size: 2vw;
             color: #000;
         }
-        p1 {
+        p {
             font-family: Copperplate, Papyrus, fantasy;
             font-size: 1.5vw;
-            color: #000; 
+            color: #000;
         }
         table {
             margin: auto;
@@ -39,7 +40,7 @@
         }
         th, td {
             padding: 12px;
-            border-bottom: 1vw solid #ddd;
+            border-bottom: 1px solid #ddd;
         }
         th {
             background-color: #4CAF50;
@@ -52,26 +53,23 @@
 </head>
 <body>
     <div style="position: relative;">
-        <img src = "game/Assets/Drawn%20Assets/Basic%20Tower-export.png" alt = "Basic_Tower"
+        <img src="game/Assets/Drawn%20Assets/Basic%20Tower-export.png" alt="Basic Tower"
             style="width:12.5%;height:auto;position: absolute; top: -2vh; left: 5vw;">
-        <img src = "game/Assets/Drawn%20Assets/Bug-export.png" alt = "Bug"
+        <img src="game/Assets/Drawn%20Assets/Bug-export.png" alt="Bug"
             style="width:15%;height:auto;position: absolute; top: -10vh; right: 3vw;">
     </div>
-    <h1>
-        Web Defense Warriors
-    </h1>
-    <p1>
-        Try and place in the top 10!
-    </p1>
-    <iframe src="game/index.html"></iframe>
+    <h1>Web Defense Warriors</h1>
+    <p>Try and place in the top 10!</p>
+    <iframe src="game/index.html" title="Game"></iframe>
 
     <h2>Submit Your Score</h2>
     <form id="scoreForm">
         <label for="player">Player Name:</label>
         <input type="text" id="player" name="player" required>
         <label for="score">Score:</label>
-        <input type="number" id="score" name="score" required>
+        <input type="number" id="score" name="score" required min="0" max="999999">
         <button type="submit">Submit</button>
+        <p id="formFeedback" style="color: red; display: none;">Error submitting score. Please try again.</p>
     </form>
 
     <h2>🏆 Top Ten Scoreboard</h2>
@@ -100,10 +98,10 @@
                 scores.forEach((score) => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                    <td>${score.rank}</td>
-                    <td>${score.player}</td>
-                    <td>${score.score}</td>
-                `;
+                        <td>${score.rank}</td>
+                        <td>${score.player}</td>
+                        <td>${score.score}</td>
+                    `;
                     tableBody.appendChild(row);
                 });
             } catch (error) {
@@ -116,6 +114,9 @@
 
             const player = document.getElementById('player').value;
             const score = document.getElementById('score').value;
+            console.log('Submitting score:', { player, score }); // Debug log
+
+            const feedback = document.getElementById('formFeedback');
 
             try {
                 const response = await fetch('/api/scores', {
@@ -125,13 +126,17 @@
                 });
 
                 if (response.ok) {
-                    loadScores(); // Refresh the table
-                    event.target.reset(); // Clear the form
+                    console.log('Score submitted successfully'); // Debug log
+                    loadScores();
+                    event.target.reset();
+                    feedback.style.display = 'none';
                 } else {
-                    console.error('Failed to submit score');
+                    console.error('Failed to submit score:', response.status); // Debug log
+                    feedback.style.display = 'block';
                 }
             } catch (error) {
-                console.error('Error submitting score:', error);
+                console.error('Error submitting score:', error); // Debug log
+                feedback.style.display = 'block';
             }
         });
 
@@ -149,21 +154,42 @@
             </tr>
         </thead>
         <tbody>
-            <tr><td><img src = "game/Assets/Drawn%20Assets/Basic%20Tower-export.png" alt = "Basic_Tower"
-                style="width:20%;height:auto"></td><td>Firewall</td><td>Summons a wall of flames to scorch any bad programs</td></tr>
-            <tr><td><img src = "game/Assets/Drawn%20Assets/Zap%20Tower-export.png" alt = "Zap_Tower"
-                style="width:20%;height:auto"></td><td>Electric Tower</td><td>Tower with small range and a faster fire rate to zap enemies away</td></tr>
-            <tr><td>3</td><td>Tower 3</td><td>Does another thing</td></tr>
-            <tr><td>4</td><td>Tower 4</td><td>Does something else</td></tr>
-            <tr><td><img src = "game/Assets/Drawn%20Assets/CPU.png" alt = "CPU"
-                style="width:20%;height:auto"></td><td>Main Computer</td><td>Is your main base. Don't let it get too infected or your computer will die</td></tr>
-            <tr><td><img src = "game/Assets/Drawn%20Assets/Bug-export.png" alt = "Bug"
-                style="width:20%;height:auto"></td><td>Bug</td><td>A simple bug. Easy to squash on its own, but don't let them group up</td></tr>
-            <tr><td><img src = "game/Assets/Drawn%20Assets/Virus-export.png" alt = "Virus"
-                style="width:20%;height:auto"></td><td>Virus</td><td>Has more health does more damage</td></tr>
-            <tr><td><img src = "game/Assets/Drawn%20Assets/Trojin-export.png" alt = "Trojan"
-                style="width:20%;height:auto"></td><td>Trojan Horse</td><td>Carries other viruses inside and releases them upon death</td></tr>
-            <tr><td>9</td><td>Another Enemy</td><td>Does a bad thing</td></tr>
+            <tr>
+                <td><img src="game/Assets/Drawn%20Assets/Basic%20Tower-export.png" alt="Basic Tower"
+                    style="width:20%;height:auto"></td>
+                <td>Firewall</td>
+                <td>Summons a wall of flames to scorch any bad programs</td>
+            </tr>
+            <tr>
+                <td><img src="game/Assets/Drawn%20Assets/Zap%20Tower-export.png" alt="Zap Tower"
+                    style="width:20%;height:auto"></td>
+                <td>Electric Tower</td>
+                <td>Tower with small range and a faster fire rate to zap enemies away</td>
+            </tr>
+            <tr>
+                <td><img src="game/Assets/Drawn%20Assets/CPU.png" alt="CPU"
+                    style="width:20%;height:auto"></td>
+                <td>Main Computer</td>
+                <td>Is your main base. Don't let it get too infected or your computer will die</td>
+            </tr>
+            <tr>
+                <td><img src="game/Assets/Drawn%20Assets/Bug-export.png" alt="Bug"
+                    style="width:20%;height:auto"></td>
+                <td>Bug</td>
+                <td>A simple bug. Easy to squash on its own, but don't let them group up</td>
+            </tr>
+            <tr>
+                <td><img src="game/Assets/Drawn%20Assets/Virus-export.png" alt="Virus"
+                    style="width:20%;height:auto"></td>
+                <td>Virus</td>
+                <td>Has more health and does more damage</td>
+            </tr>
+            <tr>
+                <td><img src="game/Assets/Drawn%20Assets/Trojin-export.png" alt="Trojan Horse"
+                    style="width:20%;height:auto"></td>
+                <td>Trojan Horse</td>
+                <td>Carries other viruses inside and releases them upon death</td>
+            </tr>
         </tbody>
     </table>
 </body>

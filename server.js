@@ -22,17 +22,35 @@ const db = new sqlite3.Database(dbPath, (err) => {
 
 // Helper Functions
 const addScore = (player, score, callback) => {
-    const insertQuery = `INSERT INTO scores (player, score) VALUES (?, ?)`;
+    const insertQuery = `
+        INSERT INTO scores (player, score)
+        VALUES (?, ?)
+    `;
     db.run(insertQuery, [player, score], function (err) {
         if (err) return callback(err);
 
-        const pruneQuery = `
-            DELETE FROM scores
-            WHERE rank NOT IN (
-                SELECT rank FROM scores ORDER BY score DESC, rank ASC LIMIT 10
+        const updateRankQuery = `
+            WITH RankedScores AS (
+                SELECT id, player, score,
+                       RANK() OVER (ORDER BY score DESC, id ASC) AS rank
+                FROM scores
+            )
+            UPDATE scores
+            SET rank = (
+                SELECT rank
+                FROM RankedScores
+                WHERE scores.id = RankedScores.id
             )
         `;
-        db.run(pruneQuery, [], callback);
+        db.run(updateRankQuery, [], (err) => {
+            if (err) return callback(err);
+
+            const pruneQuery = `
+                DELETE FROM scores
+                WHERE rank > 10
+            `;
+            db.run(pruneQuery, [], callback);
+        });
     });
 };
 
