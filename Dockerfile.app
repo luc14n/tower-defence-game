@@ -1,5 +1,7 @@
 FROM node:18-alpine
 
+LABEL org.opencontainers.image.source https://github.com/luc14n/tower-defence-game
+
 WORKDIR /usr/src/app
 
 COPY package*.json ./
