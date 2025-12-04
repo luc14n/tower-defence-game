@@ -21,13 +21,16 @@ const db = new sqlite3.Database(dbPath, (err) => {
 });
 
 // Helper Functions
-const addScore = (player, score, callback) => {
+const addScore = (player, numericScore, callback) => {
     const insertQuery = `
         INSERT INTO scores (player, score)
         VALUES (?, ?)
     `;
-    db.run(insertQuery, [player, score], function (err) {
-        if (err) return callback(err);
+    db.run(insertQuery, [player, numericScore], function (err) {
+        if (err) {
+            console.error('Insert query error:', err.message);
+            return callback(err);
+        }
 
         const updateRankQuery = `
             WITH RankedScores AS (
@@ -63,6 +66,11 @@ const fetchTopScores = (callback) => {
 app.post('/api/scores', (req, res) => {
     console.log('Request body:', req.body);
     const { player, score } = req.body;
+    const numericScore = parseInt(score, 10);
+
+    if (!player || isNaN(numericScore)) {
+        return res.status(400).json({ error: 'Player name and a valid numeric score are required' });
+    }
 
     if (!req.body.player || !req.body.score) {
         return res.status(400).send('Player name and score are required');
@@ -72,7 +80,7 @@ app.post('/api/scores', (req, res) => {
         return res.status(400).json({ error: 'Player name and score are required' });
     }
 
-    addScore(player, score, (err) => {
+    addScore(player, numericScore, (err) => {
         if (err) {
             console.error('Error adding score:', err.message);
             return res.status(500).json({ error: 'Failed to add score' });
