@@ -90,10 +90,11 @@ app.post('/api/scores', (req, res) => {
 });
 
 app.get('/api/scores', (req, res) => {
-    db.all('SELECT * FROM scores ORDER BY rank ASC', (err, rows) => {
+    const query = `SELECT rank, player, score FROM scores ORDER BY rank ASC LIMIT 10`;
+    db.all(query, [], (err, rows) => {
         if (err) {
-            console.error('Database error:', err);
-            return res.status(500).send([]);
+            console.error('Database error in /api/scores:', err.message);
+            return res.status(500).json({ error: 'Failed to fetch scores' });
         }
         res.json(rows);
     });
