@@ -102,13 +102,22 @@
                 const tableBody = document.querySelector('table tbody');
                 tableBody.innerHTML = ''; // Clear existing rows
 
+                if (data.length === 0) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                <td colspan="3" style="text-align: center;">No scores available</td>
+            `;
+                    tableBody.appendChild(row);
+                    return;
+                }
+
                 data.forEach((score, index) => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td>${index + 1}</td>
-                        <td>${score.player}</td>
-                        <td>${score.score}</td>
-                `    ;
+                <td>${index + 1}</td>
+                <td>${score.player}</td>
+                <td>${score.score}</td>
+            `;
                     tableBody.appendChild(row);
                 });
             } catch (error) {

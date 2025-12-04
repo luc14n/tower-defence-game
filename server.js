@@ -18,9 +18,16 @@ const db = new sqlite3.Database(dbPath, (err) => {
     } else {
         console.log(`[Database Initialization] Connected to the SQLite database at ${dbPath}.`);
     }
+
+    db.run('PRAGMA journal_mode=WAL;', (err) => {
+        if (err) {
+            console.error('[Database WAL Mode Error]', err.message);
+        } else {
+            console.log('[Database] WAL mode enabled.');
+        }
+    });
 });
 
-// Helper Functions
 const addScore = (player, numericScore, callback) => {
     const insertQuery = `
         INSERT INTO scores (player, score)
@@ -28,7 +35,7 @@ const addScore = (player, numericScore, callback) => {
     `;
     db.run(insertQuery, [player, numericScore], function (err) {
         if (err) {
-            console.error('Insert query error:', err.message);
+            console.error('[addScore] Insert query error:', err.message);
             return callback(err);
         }
 
@@ -46,13 +53,23 @@ const addScore = (player, numericScore, callback) => {
             )
         `;
         db.run(updateRankQuery, [], (err) => {
-            if (err) return callback(err);
+            if (err) {
+                console.error('[addScore] Rank update error:', err.message);
+                return callback(err);
+            }
 
             const pruneQuery = `
                 DELETE FROM scores
                 WHERE rank > 10
             `;
-            db.run(pruneQuery, [], callback);
+            db.run(pruneQuery, [], (err) => {
+                if (err) {
+                    console.error('[addScore] Prune query error:', err.message);
+                    return callback(err);
+                }
+                console.log('[addScore] Score added and ranks updated successfully.');
+                callback(null);
+            });
         });
     });
 };
@@ -70,11 +87,7 @@ app.post('/api/scores', (req, res) => {
 
     if (!player || isNaN(numericScore)) {
         console.error('[POST /api/scores] Validation Error: Missing or invalid player name/score.');
-        return res.status(400).json({ error: 'Player name and a valid numeric score are required' });
-    }
-
-    if (!player || isNaN(numericScore)) {
-        return res.status(400).json({ error: 'Player name and a valid numeric score are required' });
+        return res.status(400).json({error: 'Player name and a valid numeric score are required'});
     }
 
     if (!req.body.player || !req.body.score) {
@@ -116,4 +129,15 @@ app.get('/', (req, res) => {
 // Start Server
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
+});
+
+process.on('SIGINT', () => {
+    db.close((err) => {
+        if (err) {
+            console.error('[Database Close Error]', err.message);
+        } else {
+            console.log('[Database] Connection closed.');
+        }
+        process.exit(0);
+    });
 });

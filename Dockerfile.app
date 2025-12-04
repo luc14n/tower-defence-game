@@ -17,6 +17,7 @@ RUN apk add --no-cache sqlite
 
 # Create a directory for the SQLite database
 RUN mkdir -p /usr/src/app/data
+RUN chmod -R 777 /usr/src/app/data
 
 # Copy the SQLite script into the container
 COPY ./app/data/init.sql /usr/src/app/data/init.sql

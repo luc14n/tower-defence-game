@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  app:
+    image: tower-defence-game
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/usr/src/app/data
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "512M"
+    command: ["npm", "start"]
+
+volumes:
+  data:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/data

@@ -1,5 +1,6 @@
 CREATE TABLE scores (
-                        rank INTEGER PRIMARY KEY,
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        rank INTEGER NOT NULL,
                         player TEXT NOT NULL,
                         score INTEGER NOT NULL
 );
