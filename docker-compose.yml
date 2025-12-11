@@ -3,15 +3,15 @@
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile.app
-    ports:
-      - "8000:8000"
-    volumes:
-      # CHANGE THIS LINE:
-      # Old: - COSC450DB:/usr/src/app/database
-      - COSC450DB:/usr/src/app/data # Align with Dockerfile and Server path
+	build:
+	  context: .
+	  dockerfile: Dockerfile.app
+	ports:
+	  - "8000:8000"
+	volumes:
+	  # CHANGE THIS LINE:
+	  # Old: - COSC450DB:/usr/src/app/database
+	  - COSC450DB:/usr/src/app/data # Align with Dockerfile and Server path
 
 volumes:
   COSC450DB:
