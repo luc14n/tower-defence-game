@@ -1,13 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bess207sn47b8"]
+[gd_scene load_steps=5 format=3 uid="uid://bess207sn47b8"]
 
 [ext_resource type="PackedScene" uid="uid://deug8vwqga8to" path="res://Scenes/Towers/Proj Tower.tscn" id="1_s4ntf"]
+[ext_resource type="Script" uid="uid://dhfo1qplx5mce" path="res://Scripts/Towers/No Bullet.gd" id="2_sernl"]
+[ext_resource type="Resource" uid="uid://c3ir46xjwkw5s" path="res://Resources/Towers/Sniper_Tower.tres" id="3_agtxh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s4ntf"]
-radius = 1453.2698
+radius = 1000.0
 
 [node name="Slow Tower" instance=ExtResource("1_s4ntf")]
-bullet_damage = 3.5
-fire_rate = 0.3
+script = ExtResource("2_sernl")
+stats = ExtResource("3_agtxh")
+projectile = null
 
 [node name="vision_area_pannel" parent="." index="0"]
 offset_left = -30.0
@@ -20,6 +23,3 @@ shape = SubResource("CircleShape2D_s4ntf")
 
 [node name="AnimatedSprite2D" parent="." index="2"]
 self_modulate = Color(0.98583335, 1, 0.14999998, 1)
-
-[node name="panel" parent="Upgrade UI" index="0"]
-visible = false

@@ -13,8 +13,6 @@ func _on_gui_input(event: InputEvent) -> void:
 	var data : TileData = tilemap.get_cell_tile_data(cell)
 	if !data: return
 	var enem_path_flag : bool = data.get_custom_data("EnemPath")
-	var placement_flag = tower.can_be_placed
-	placement_flag = enem_path_flag
 	
 	if event is InputEventMouseButton and event.button_mask == 1:		# left mouse down
 		if GameManager.Money >= worth:
@@ -28,12 +26,13 @@ func _on_gui_input(event: InputEvent) -> void:
 		if GameManager.Money >= worth:
 			if get_child_count() > 1:
 				get_child(1).global_position = event.global_position 
-			if placement_flag:		#CHANGE COLOR OF AREA IF NOT PLACEABLE
-				pass
-			else:
-				pass
+			if get_child(1).vision_area:
+				if !enem_path_flag:			# Placable Area
+					get_child(1).vision_area.modulate = Color(1.0, 1.0, 1.0, 1.0)
+				else:
+					get_child(1).vision_area.modulate = Color(1.0, 0.0, 0.0, 1.0)
 	elif event is InputEventMouseButton and event.button_mask == 0:		# left mouse up
-		if !event.global_position.y >= 245:
+		if !event.global_position.y >= 285:	 # UI length
 			if GameManager.Money >= worth:
 				if get_child_count() > 1:
 					get_child(1).queue_free()
@@ -44,7 +43,14 @@ func _on_gui_input(event: InputEvent) -> void:
 						tow_container.add_child(tower)
 						tower.particles.emitting = true
 						tower.vision_area.hide()
-						worth += .2
+						if get_child(1):
+							match get_child(1).stats.name:
+								"normal":
+									worth += 1
+								"zap":
+									worth += 2
+								"snipe":
+									worth += 3
 				else:					# Wrong Spot
 					print("CANT PLACE")
 		else:

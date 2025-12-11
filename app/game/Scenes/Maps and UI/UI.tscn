@@ -17,7 +17,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -320.0
-offset_top = -64.0
+offset_top = -38.0
 offset_right = 320.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -30,18 +30,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -32.0
-offset_right = 100.0
-offset_bottom = 32.0
+offset_left = -167.0
+offset_top = -16.0
+offset_right = 167.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
-vertical = true
+alignment = 1
 
-[node name="Norm_tank_panel" parent="Panel/FlowContainer" instance=ExtResource("1_vg8ev")]
+[node name="Norm_Tower" parent="Panel/FlowContainer" instance=ExtResource("1_vg8ev")]
 layout_mode = 2
 
-[node name="FastTower" parent="Panel/FlowContainer" instance=ExtResource("3_ksqms")]
+[node name="Zap_Panel" parent="Panel/FlowContainer" instance=ExtResource("3_ksqms")]
 layout_mode = 2
 
 [node name="Slow_tower" parent="Panel/FlowContainer" instance=ExtResource("4_obbgy")]
@@ -49,57 +49,46 @@ layout_mode = 2
 
 [node name="Score" type="Label" parent="Panel"]
 layout_mode = 1
-offset_right = 124.0
-offset_bottom = 14.0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 101.0
+offset_bottom = 17.0
 theme = ExtResource("2_m7nxg")
-theme_override_font_sizes/font_size = 19
-text = "Score: 6767676767676767"
+theme_override_font_sizes/font_size = 12
+text = "Score: 676767676"
 
 [node name="money" type="Label" parent="Panel"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -14.0
-offset_right = 67.0
+offset_left = 4.0
+offset_top = -16.0
+offset_right = 101.0
+offset_bottom = -2.0
 grow_vertical = 0
 theme = ExtResource("2_m7nxg")
-theme_override_font_sizes/font_size = 19
+theme_override_font_sizes/font_size = 12
 text = "Mons: 999999"
 vertical_alignment = 2
 
-[node name="wave_count" type="Label" parent="Panel"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -104.0
-offset_top = -256.0
-offset_bottom = -242.0
-grow_horizontal = 0
+[node name="Wave Num" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 22.0
+offset_right = 201.0
+offset_bottom = 37.0
 theme = ExtResource("2_m7nxg")
-theme_override_font_sizes/font_size = 10
-text = "Wave Count: 999999"
-horizontal_alignment = 2
-vertical_alignment = 2
+text = "Wave 999999"
 
-[node name="Enemies left" type="Label" parent="Panel"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -104.0
-offset_top = -306.0
-offset_bottom = -292.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="Cpu Health" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 3.0
+offset_right = 207.0
+offset_bottom = 18.0
 theme = ExtResource("2_m7nxg")
-theme_override_font_sizes/font_size = 10
-text = "Wave Count: 999999"
-horizontal_alignment = 2
-vertical_alignment = 2
+text = "cpu health - "
 
 [node name="Next Wave" type="Button" parent="Panel"]
 layout_mode = 1
@@ -108,12 +97,30 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -42.0
+offset_left = -69.0
 offset_top = -10.0
+offset_right = -5.0
 offset_bottom = 10.0
 grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("2_m7nxg")
 text = "Next Wave"
 
+[node name="Retry" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = -12.0
+offset_right = -5.0
+offset_bottom = 12.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("2_m7nxg")
+text = "ReStart?"
+
 [connection signal="pressed" from="Panel/Next Wave" to="." method="_on_next_wave_pressed"]
+[connection signal="pressed" from="Panel/Retry" to="." method="_on_retry_pressed"]

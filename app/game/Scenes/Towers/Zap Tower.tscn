@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://h3gy6igsgysx"]
+[gd_scene load_steps=13 format=3 uid="uid://h3gy6igsgysx"]
 
-[ext_resource type="Script" uid="uid://dhfo1qplx5mce" path="res://Scripts/Tanks/FastTower.gd" id="1_jsqar"]
+[ext_resource type="Script" uid="uid://dhfo1qplx5mce" path="res://Scripts/Towers/No Bullet.gd" id="1_jsqar"]
+[ext_resource type="Resource" uid="uid://2qdavnovp5ne" path="res://Resources/Towers/Zap_Tower.tres" id="2_5jm0j"]
 [ext_resource type="Texture2D" uid="uid://d21vjp1o8gcgw" path="res://Assets/Drawn Assets/Tower Defence TileSet.png" id="2_i81jm"]
 [ext_resource type="Theme" uid="uid://qaxpm307f12q" path="res://Assets/UI.tres" id="2_jsqar"]
 
@@ -40,12 +41,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Zap Tower" type="Area2D" node_paths=PackedStringArray("particles", "vision", "vision_area", "upgrade_panel", "damage_button", "range_button", "fire_rate_button") groups=["Towers"]]
+[node name="Zap Tower" type="Area2D" node_paths=PackedStringArray("particles", "detection", "vision_area", "upgrade_panel", "damage_button", "range_button", "fire_rate_button") groups=["Towers"]]
 script = ExtResource("1_jsqar")
-bullet_damage = 0.5
-fire_rate = 4.0
+stats = ExtResource("2_5jm0j")
 particles = NodePath("CPUParticles2D")
-vision = NodePath("EnemDetectection/Vision_Area")
+detection = NodePath("EnemDetectection/Vision_Area")
 vision_area = NodePath("Area")
 upgrade_panel = NodePath("Upgrade UI/panel")
 damage_button = NodePath("Upgrade UI/panel/HBoxContainer/Damage")

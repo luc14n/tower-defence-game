@@ -8,6 +8,6 @@ name = "Bug"
 max_health = 2.0
 max_speed = 30.0
 damage = 1.0
-Worth = 3.0
+Worth = 2.0
 Score = 10
 metadata/_custom_type_script = "uid://cqxdnbyd5ml1m"

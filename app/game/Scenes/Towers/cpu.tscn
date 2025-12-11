@@ -9,3 +9,4 @@ offset_bottom = 40.0
 icon = ExtResource("1_xgm1w")
 flat = true
 script = ExtResource("1_jfgkk")
+max_health = 10

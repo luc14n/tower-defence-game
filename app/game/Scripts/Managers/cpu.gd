@@ -2,7 +2,7 @@ extends Button
 
 signal Dead
 
-@export var max_health: float
+@export var max_health: int
 @onready var health := max_health
 
 func take_dam(dmg) -> void:

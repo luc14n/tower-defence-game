@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_7kfun")
 name = "Trojin Horse"
-max_health = 500.0
+max_health = 250.0
 max_speed = 20.0
 damage = 100.0
 Score = 10000

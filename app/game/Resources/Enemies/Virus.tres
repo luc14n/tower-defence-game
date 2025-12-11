@@ -8,6 +8,6 @@ name = "Virus"
 max_health = 1.0
 max_speed = 35.0
 damage = 1.0
-Worth = 1.5
+Worth = 1.0
 Score = 100
 metadata/_custom_type_script = "uid://cqxdnbyd5ml1m"

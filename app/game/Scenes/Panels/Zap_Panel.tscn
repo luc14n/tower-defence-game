@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bg2vevy3diekj"]
+[gd_scene load_steps=7 format=3 uid="uid://bg2vevy3diekj"]
 
-[ext_resource type="Script" uid="uid://bjfa66a3icts0" path="res://Scripts/Levels-UI/double_tower_panel_node.gd" id="1_kv740"]
+[ext_resource type="Script" uid="uid://dmdqyphadnhrn" path="res://Scripts/Panels/Norm_Tower_panel_node.gd" id="1_tt6nr"]
 [ext_resource type="Script" uid="uid://cn2dffbl3qbcy" path="res://Scripts/Panels/Norm_Tower_panel.gd" id="2_lgkbv"]
+[ext_resource type="Theme" uid="uid://qaxpm307f12q" path="res://Assets/UI.tres" id="2_ni2h4"]
 [ext_resource type="PackedScene" uid="uid://h3gy6igsgysx" path="res://Scenes/Towers/Zap Tower.tscn" id="3_uialx"]
 [ext_resource type="Texture2D" uid="uid://npcof4x43w2r" path="res://Assets/Drawn Assets/Zap Tower.png" id="4_uialx"]
 
@@ -19,19 +20,20 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="Zap_Panel" type="Control" node_paths=PackedStringArray("Pannel")]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("1_kv740")
+offset_right = 32.0
+offset_bottom = 32.0
+script = ExtResource("1_tt6nr")
 Pannel = NodePath("Double_Tower_Panel")
 
 [node name="Double_Tower_Panel" type="Panel" parent="."]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 0
-offset_right = 64.0
-offset_bottom = 64.0
+offset_right = 32.0
+offset_bottom = 32.0
+theme = ExtResource("2_ni2h4")
 theme_override_styles/panel = SubResource("StyleBoxFlat_ukjyt")
 script = ExtResource("2_lgkbv")
 display_tower = ExtResource("3_uialx")
@@ -39,17 +41,17 @@ worth = 10.0
 metadata/_custom_type_script = "uid://cn2dffbl3qbcy"
 
 [node name="Sprite2D" type="Sprite2D" parent="Double_Tower_Panel"]
-position = Vector2(32, 24)
+position = Vector2(16, 9)
 rotation = 1.5707964
-scale = Vector2(2, 2)
+scale = Vector2(0.9384825, 0.964281)
 texture = ExtResource("4_uialx")
 
 [node name="Cost" type="Label" parent="."]
 layout_mode = 0
-offset_left = -8.0
-offset_top = 40.0
-offset_right = 72.0
-offset_bottom = 63.0
+offset_top = 16.0
+offset_right = 32.0
+offset_bottom = 30.0
+theme_override_font_sizes/font_size = 10
 text = "9999"
 horizontal_alignment = 1
 vertical_alignment = 1
